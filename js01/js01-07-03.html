@@ -5,9 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
+      div {
+        display: flex;
+        justify-content: space-evenly;
+        list-style: none;
+        padding: 0;
+        flex-wrap: wrap;
+      }
       table {
+        width: 200px;
         border-collapse: collapse;
         background-color: beige;
+        margin: 10px;
       }
       th,
       td {
@@ -21,14 +30,14 @@
       }
     </style>
     <script>
-      let list = `<table>`;
+      let list = `<div>`;
       for (let j = 1; j < 10; j++) {
-        list += `<tr><th colspan="2">${j} 단</th></tr>`;
+        list += `<table><tr><th colspan="2">${j} 단</th></tr>`;
         for (let i = 0; i < 9; i++) {
           list += `<tr><td>${j} x ${i + 1}</td><td>${j * (i + 1)}</td></tr>`;
         }
       }
-      list += `</table>`;
+      list += `</table></div>`;
 
       document.write(list);
     </script>
