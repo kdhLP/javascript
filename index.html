@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+      }
+      .container div {
+        flex: 0 0 50%;
+        box-sizing: border-box;
+        padding: 20px 100px;
+        border-right: 1px solid #000;
+      }
+      .container div:nth-child(2n) {
+        border-right: none;
+      }
+      .container div h2,
+      .container div h3 {
+        margin: 15px 0;
+      }
+      .short-hr {
+        width: 75%;
+        margin: 30px auto;
+      }
+      .short-hr2 {
+        width: 100%;
+        margin: 10px auto;
+        background: #000;
+        height: 1px;
+      }
+      a {
+        text-decoration: none;
+      }
+      h3 {
+        transition: all 0.5s ease;
+        width: 100%;
+      }
+      h3:hover {
+        background-color: gainsboro;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 style="text-align: center">javaScript 특강</h1>
+    <hr />
+    <div class="container">
+      <div class="box">
+        <hr class="short-hr2" />
+        <h2>javaScript 강의 1</h2>
+        <hr class="short-hr2" />
+        <h3><a href="js01/js01-01.html">자바 스크립트</a></h3>
+        <h3><a href="js01/js01-02.html">프롬프트</a></h3>
+        <h3><a href="js01/js01-03.html">문자연산자</a></h3>
+        <h3><a href="js01/js01-04.html">간편</a></h3>
+        <h3><a href="js01/js01-05.html">템플릿 문자열</a></h3>
+        <h3><a href="js01/js01-06.html">환율 계산기</a></h3>
+        <h3><a href="js01/js01-07-01.html">구구단-1</a></h3>
+        <h3><a href="js01/js01-07-02.html">구구단-2</a></h3>
+        <h3><a href="js01/js01-07-03.html">구구단-3</a></h3>
+      </div>
+      <div>
+        <hr class="short-hr2" />
+        <h2>javaScript 강의 2</h2>
+        <hr class="short-hr2" />
+        <h3><a href="js02/js02-01.html">2-1(...)</a></h3>
+        <h3><a href="js02/js02-02.html">2-2(...)</a></h3>
+        <h3><a href="js02/js02-03.html">2-3(...)</a></h3>
+        <h3><a href="js02/js02-04.html">2-4(...)</a></h3>
+        <h3><a href="js02/js02-05.html">2-5(...)</a></h3>
+        <h3><a href="js02/js02-06.html">2-6(...)</a></h3>
+      </div>
+    </div>
+  </body>
+</html>
