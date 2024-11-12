@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        background-color: antiquewhite;
+      }
+      .out1 {
+        color: brown;
+      }
+    </style>
+    <script>
+      const ff = prompt(" 출력할 단(1 ~ 9)을 입력해주세요.");
+      for (let i = 1; i < 10; i++) {
+        const ans = Number(ff * i);
+        const list = `<h1 class = "out1"> ${ff} x ${i} = ${ans} 입니다.</h1>`;
+        document.write(list);
+      }
+    </script>
+  </head>
+  <body></body>
+</html>
