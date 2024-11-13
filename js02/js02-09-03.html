@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>함수</title>
+  </head>
+  <body>
+    <h1></h1>
+    <h1></h1>
+    <h1></h1>
+    <h1></h1>
+    <h1></h1>
+    <script>
+      const color = ["#837ae9", "aqua", "coral", "dodgerblue", "#70eb51"];
+      const ment = ["보라색", "아쿠아", "오렌지", "파랑색", "초록색 마지막"];
+      const header = document.querySelectorAll("h1");
+      header.forEach((v, i) => {
+        v.textContent = `여기는 '` + ment[i] + `' 헤더`;
+        v.style.color = "white";
+        v.style.backgroundColor = color[i];
+      });
+    </script>
+  </body>
+</html>
+</html>
