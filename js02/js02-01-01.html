@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>좌석 배치1</title>
+    <style>
+      .container {
+        text-align: center;
+        margin-top: 20px;
+      }
+      table {
+        display: inline-block;
+        border-collapse: collapse;
+        background-color: beige;
+      }
+      th,
+      td {
+        border: 2px solid #857979;
+        text-align: center;
+        padding: 10px;
+        width: 60px;
+      }
+      th {
+        background-color: rgb(78, 92, 38);
+        color: #fff;
+      }
+    </style>
+    <script>
+      const row = prompt("줄의 인원을 결정해주세요.");
+      const all = prompt("전체 인원을 결정해주세요.");
+
+      let list = `<div class="container"><h1 style="text-align: center">좌석 배치표</h1><table>`;
+      list += `<tr><th colspan="${row}">좌석 배치</th></tr>`;
+      let count = 1;
+
+      for (let i = 0; i < Math.ceil(all / row); i++) {
+        list += `<tr>`;
+        for (let j = 0; j < row; j++) {
+          if (count <= all) {
+            list += `<td> 좌석 ${count}</td>`;
+            count++;
+          } else {
+            list += `<td></td>`;
+          }
+        }
+        list += `</tr>`;
+      }
+
+      list += `</table></div>`;
+      document.write(list);
+    </script>
+  </head>
+  <body></body>
+</html>
