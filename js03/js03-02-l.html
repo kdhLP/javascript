@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>로또 번호 시뮬레이션 결과</title>
+    <style>
+      div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        margin: auto;
+      }
+      .charts {
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      table {
+        margin-top: 20px;
+        border-collapse: collapse;
+        width: 75%;
+        margin-bottom: 50px;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <h1>로또 번호 시뮬레이션 결과</h1>
+    <div>
+      <h2>로또 번호 등장 횟수 그래프</h2>
+    </div>
+    <div class="charts">
+      <canvas id="lottoChart" width="300" height="200"></canvas>
+      <canvas id="top3Chart" width="100" height="75"></canvas>
+    </div>
+    <div>
+      <h2>로또 번호 등장 횟수 표</h2>
+    </div>
+    <div>
+      <table id="lottoTable">
+        <thead>
+          <tr>
+            <th>번호</th>
+            <th>등장 횟수</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <script>
+      const lottoCounts = Array(45).fill(0);
+
+      for (let i = 0; i < 100000; i++) {
+        let lotto = [];
+        while (lotto.length < 6) {
+          const ran = Math.floor(Math.random() * 45) + 1;
+          if (!lotto.includes(ran)) {
+            lotto.push(ran);
+            lottoCounts[ran - 1]++;
+          }
+        }
+      }
+
+      const labels = Array.from({ length: 45 }, (_, i) => i + 1);
+
+      function getRandomColor() {
+        const letters = "0123456789ABCDEF";
+        let color = "#";
+        color += "99";
+        for (let i = 0; i < 3; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        color += "9";
+        return color;
+      }
+
+      const backgroundColors = Array.from({ length: 45 }, () =>
+        getRandomColor()
+      );
+
+      const data = {
+        labels: labels,
+        datasets: [
+          {
+            label: "로또 번호 등장 횟수",
+            data: lottoCounts,
+            backgroundColor: backgroundColors,
+            borderColor: "rgba(54, 162, 235, 1)",
+            borderWidth: 1,
+          },
+        ],
+      };
+
+      const config = {
+        type: "bar",
+        data: data,
+        options: {
+          scales: {
+            y: {
+              type: "logarithmic",
+              beginAtZero: true,
+              ticks: {
+                callback: function (value) {
+                  return value.toLocaleString();
+                },
+              },
+            },
+          },
+        },
+      };
+
+      const lottoChart = new Chart(
+        document.getElementById("lottoChart"),
+        config
+      );
+
+      // =====================================================================================
+
+      const top3 = [...lottoCounts]
+        .map((count, index) => ({ number: index + 1, count }))
+        .sort((a, b) => b.count - a.count)
+        .slice(0, 6);
+
+      const top3Labels = top3.map((item) => `숫자 ${item.number}`);
+      const top3Data = top3.map((item) => item.count);
+      const top3Colors = top3.map((item) => backgroundColors[item.number - 1]);
+
+      const top3ChartData = {
+        labels: top3Labels,
+        datasets: [
+          {
+            label: "상위 3개 번호 등장 횟수",
+            data: top3Data,
+            backgroundColor: top3Colors,
+            borderColor: "rgba(255, 99, 132, 1)",
+            borderWidth: 1,
+          },
+        ],
+      };
+
+      const top3Config = {
+        type: "polarArea",
+        data: top3ChartData,
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: "top",
+            },
+          },
+        },
+      };
+
+      const top3Chart = new Chart(
+        document.getElementById("top3Chart"),
+        top3Config
+      );
+
+      // =====================================================================================
+
+      const tableBody = document
+        .getElementById("lottoTable")
+        .getElementsByTagName("tbody")[0];
+      labels.forEach((label, index) => {
+        const row = document.createElement("tr");
+        const cellNumber = document.createElement("td");
+        cellNumber.textContent = label;
+        const cellCount = document.createElement("td");
+        cellCount.textContent = lottoCounts[index].toLocaleString();
+        row.appendChild(cellNumber);
+        row.appendChild(cellCount);
+        tableBody.appendChild(row);
+      });
+    </script>
+  </body>
+</html>
