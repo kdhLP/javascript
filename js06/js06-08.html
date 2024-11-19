@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML 끌어오기</title>
+    <style>
+      div:hover {
+        background-color: darkgray;
+      }
+    </style>
+
+    <script>
+      const url = "https://snu.ac.kr";
+      fetch(url)
+        .then((res) => res.text())
+        .then((data) => {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(data, "text/html");
+          //   const bodyContent = doc.body.innerHTML;
+          //   console.log(bodyContent);
+
+          const myClass = doc.querySelector(".board-index-img1");
+          const infoTitle = myClass.querySelectorAll(".title");
+          const infoInfo = myClass.querySelectorAll(".sub");
+          //   console.log(infoTitle);
+          infoTitle.forEach((v, i) => {
+            document.write(`<div><h2>${i + 1} : ${v.innerHTML}</h2>`);
+            document.write(`<h3> ${infoInfo[i].innerHTML}</h3></div><hr>`);
+          });
+        });
+
+      // .board-index-img1 > .item ...
+    </script>
+  </head>
+  <body></body>
+</html>
