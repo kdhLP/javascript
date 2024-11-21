@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>csv파일업로드분석(내장객체)</title>
+  </head>
+  <body>
+    <input type="file" id="csvFile" accept=".csv, .txt" multiple />
+    <button id="uploadBtn">업로드</button>
+    <hr />
+    <pre id="output"></pre>
+    <script>
+      const btn = document.getElementById("uploadBtn");
+      btn.addEventListener("click", () => {
+        const inp = document.querySelector("#csvFile");
+        const output = document.getElementById("output");
+        output.textContent = "";
+
+        const files = inp.files;
+        if (files.length === 0) {
+          output.textContent = "File Not Found";
+          return;
+        }
+        Array.from(files).forEach((file) => {
+          const fileInfo = `
+            이름: ${file.name}
+            크기: ${(file.size / 1024).toFixed(2)} KB
+            타입: ${file.type}
+           `;
+          output.textContent += fileInfo + "\n";
+        });
+      });
+    </script>
+  </body>
+</html>

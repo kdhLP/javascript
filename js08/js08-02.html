@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>선택자 내용 추가</title>
+    <script>
+      const myGet = (opt) => {
+        console.log(opt[0].bio);
+        const select = document.createElement("select");
+        document.body.appendChild(select);
+
+        opt.forEach((v, i) => {
+          const option = document.createElement("option");
+          option.textContent = v.name;
+          select.appendChild(option);
+        });
+        const p = document.createElement("p");
+        document.body.appendChild(p);
+        p.innerHTML = "읽고 싶은 내용을 선택해주세요.";
+
+        select.addEventListener("change", (e) => {
+          const selectedIndex = e.target.selectedIndex;
+          const selectedItem = opt[selectedIndex];
+
+          p.innerHTML =
+            `<h3>[ ${selectedItem.name} ]</h3>` +
+            `<p> ${selectedItem.bio} </p>` +
+            `<p><strong> Version : </strong> ${selectedItem.version}</p> `;
+        });
+      };
+
+      const url =
+        "https://microsoftedge.github.io/Demos/json-dummy-data/256KB-min.json";
+      fetch(url)
+        .then((response) => response.json())
+        .then((json) => myGet(json));
+    </script>
+  </head>
+  <body></body>
+</html>
